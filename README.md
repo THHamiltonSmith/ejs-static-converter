@@ -35,7 +35,7 @@ const server = require("http").Server(app);
 // References
 const ejs = require("ejs");
 var fs = require("fs");
-const staticGen = require("static-generator")
+const convertToStatic = require("ejs-static-converter")
 
 // Declare ejs, JSON formatting and set static files folder.
 app.set("view engine", "ejs");
@@ -64,7 +64,7 @@ server.listen(3000);
 const pages = ["Index", "Filmatic"]
 
 // Run the function
-staticGen(pages)
+convertToStatic(pages)
 ```
 
 ## Contributing
