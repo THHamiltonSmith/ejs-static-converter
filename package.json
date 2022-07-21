@@ -1,0 +1,29 @@
+{
+  "name": "ejs-static-converter",
+  "version": "1.0.0",
+  "description": "Converts an express EJS app into a static HTML website.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/THHamiltonSmith/ejs-static-converter.git"
+  },
+  "keywords": [
+    "static",
+    "site",
+    "generator",
+    "ejs",
+    "static",
+    "html",
+    "templates",
+    "express"
+  ],
+  "author": "THHamiltonSmith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/THHamiltonSmith/ejs-static-converter/issues"
+  },
+  "homepage": "https://github.com/THHamiltonSmith/ejs-static-converter#readme"
+}
