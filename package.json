@@ -11,12 +11,10 @@
     "url": "git+https://github.com/THHamiltonSmith/ejs-static-converter.git"
   },
   "keywords": [
-    "static",
-    "site",
-    "generator",
+    "static site generator",
     "ejs",
+    "static html",
     "static",
-    "html",
     "templates",
     "express"
   ],
