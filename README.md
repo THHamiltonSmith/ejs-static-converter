@@ -61,10 +61,13 @@ server.listen(3000);
 //
 
 // List the names of all .ejs files in the '/views' directory.
-const pages = ["Index", "Filmatic"]
+const pages = ["Index", "Page-2"]
 
 // Run the function
 convertToStatic(pages)
+
+// If you don't need the function, comment it out so it doesn't convert your site when you don't need it.
+// convertToStatic(pages)
 ```
 
 ## Contributing
