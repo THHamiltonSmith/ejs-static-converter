@@ -1,6 +1,6 @@
 {
   "name": "ejs-static-converter",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Converts an express EJS app into a static HTML website.",
   "main": "main.js",
   "scripts": {
