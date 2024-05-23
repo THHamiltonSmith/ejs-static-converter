@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/THHamiltonSmith/ejs-static-converter#readme",
   "bin": {
-    "ejs-static-converter": "./convert.js"
+    "ejs-static-converter": "convert.js"
   },
   "dependencies": {
     "ejs": "^3.1.10",
