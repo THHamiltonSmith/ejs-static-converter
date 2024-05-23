@@ -1,7 +1,17 @@
 {
+  "name": "ejs-demo-project",
+  "version": "1.0.0",
+  "description": "A demo project for testing EJS to static HTML conversion.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "convert": "node ../convert.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
   "dependencies": {
-    "ejs": "^3.1.8",
-    "ejs-static-converter": "^1.0.0",
-    "express": "^4.18.1"
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "fs-extra": "^11.2.0"
   }
 }

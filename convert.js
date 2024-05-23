@@ -1,28 +1,37 @@
+#!/usr/bin/env node
+
 const ejs = require('ejs');
 const fs = require('fs');
 const path = require('path');
-const { fileURLToPath } = require('url');
-const fse = require('fs-extra'); // For copying directories
+const fse = require('fs-extra');
 
-// If you're using __dirname and __filename in ES modules
-const __filename = fileURLToPath(__filename);
-const __dirname = path.dirname(__filename);
+// Ensure arguments are provided
+if (process.argv.length < 3) {
+  console.error('Usage: node convert.js <path to pages.config.js>');
+  process.exit(1);
+}
 
-const pages = [
-  { template: 'home.ejs', output: 'index.html', data: { title: "Home" } },
-  { template: 'services.ejs', output: 'services/index.html', data: { title: "Services" } },
-  { template: 'services/service1.ejs', output: 'services/service1/index.html', data: { title: "Service 1" } },
-  { template: 'legal/privacy/privacy.ejs', output: 'legal/privacy/index.html', data: { title: "Privacy" } },
-  { template: '404.ejs', output: '404/index.html', data: { title: "404 - Page Not Found" } }
-];
+// Get the configuration file path from the arguments
+const configPath = path.resolve(process.argv[2]);
 
-const viewsDir = path.join(__dirname, 'views');
-const outputDir = path.join(__dirname, 'dist');
-const publicDir = path.join(__dirname, 'public');
+// Check if the configuration file exists
+if (!fs.existsSync(configPath)) {
+  console.error(`Configuration file not found: ${configPath}`);
+  process.exit(1);
+}
+
+// Load pages configuration
+const pages = require(configPath);
+
+// Define base directories relative to the project root
+const projectRoot = process.cwd();
+const viewsDir = path.join(projectRoot, 'views');
+const outputDir = path.join(projectRoot, 'dist');
+const publicDir = path.join(projectRoot, 'public');
 
 // Ensure output directory exists
-if (!fs.existsSync(outputDir)){
-  fs.mkdirSync(outputDir);
+if (!fs.existsSync(outputDir)) {
+  fs.mkdirSync(outputDir, { recursive: true });
 }
 
 // Render EJS templates to static HTML
