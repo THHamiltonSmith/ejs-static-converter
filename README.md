@@ -57,6 +57,8 @@ Here's an example of how to set up your server and use the ejs-static-converter:
 
 
 ```js
+// src/server.js
+
 // Main dependencies
 const express = require("express");
 const app = express();
