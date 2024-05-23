@@ -1,44 +1,57 @@
-// Convert an EJS template site to static HTML.
+const ejs = require('ejs');
+const fs = require('fs');
+const path = require('path');
+const { fileURLToPath } = require('url');
+const fse = require('fs-extra'); // For copying directories
 
-// References
-const ejs = require("ejs");
-var fs = require("fs");
-const { cwd } = require('node:process');
+// If you're using __dirname and __filename in ES modules
+const __filename = fileURLToPath(__filename);
+const __dirname = path.dirname(__filename);
 
-// Main function
-function convertSite(pages) {
-    // For each page given by the user
-    for (var i = 0; i < pages.length; i++) {
-        // Replace any multi-word views that have a '-' with a space
-        var titleName = pages[i].replaceAll("-", " ");
+const pages = [
+  { template: 'home.ejs', output: 'index.html', data: { title: "Home" } },
+  { template: 'services.ejs', output: 'services/index.html', data: { title: "Services" } },
+  { template: 'services/service1.ejs', output: 'services/service1/index.html', data: { title: "Service 1" } },
+  { template: 'legal/privacy/privacy.ejs', output: 'legal/privacy/index.html', data: { title: "Privacy" } },
+  { template: '404.ejs', output: '404/index.html', data: { title: "404 - Page Not Found" } }
+];
 
-        // Render the .ejs file as a string.
-        ejs.renderFile("./views/" + pages[i].toLowerCase() + ".ejs", (err, str) => {
-            //
-            // Don't create a directory for the index page.
-            // For the rest, create a directory inside the users '/public' directory.
-            if (pages[i] == "Index") {
-                fs.writeFileSync(cwd() + "/public/index.html", str, function () {
-                    handleStaticErrors(newErr);
-                });
-            } else {
-                fs.mkdirSync(cwd() + "/public/" + pages[i].toLowerCase());
-                fs.writeFileSync(cwd() + "/public/" + pages[i].toLowerCase() + "/index.html", str, function () {
-                    handleStaticErrors(newErr);
-                });
-            }
-        });
-    }
+const viewsDir = path.join(__dirname, 'views');
+const outputDir = path.join(__dirname, 'dist');
+const publicDir = path.join(__dirname, 'public');
+
+// Ensure output directory exists
+if (!fs.existsSync(outputDir)){
+  fs.mkdirSync(outputDir);
 }
 
-// Handle errors when making a static file.
-function handleStaticErrors(err) {
+// Render EJS templates to static HTML
+pages.forEach(page => {
+  const templatePath = path.join(viewsDir, page.template);
+  const outputPath = path.join(outputDir, page.output);
+  const outputDirPath = path.dirname(outputPath);
+
+  // Ensure the output directory for the page exists
+  if (!fs.existsSync(outputDirPath)) {
+    fs.mkdirSync(outputDirPath, { recursive: true });
+  }
+
+  ejs.renderFile(templatePath, page.data, (err, str) => {
     if (err) {
-        console.log(err);
-        return false;
+      console.error(`Error rendering ${page.template}:`, err);
+      return;
     }
-    return true;
-}
 
-// Export the function
-module.exports = convertSite;
+    fs.writeFileSync(outputPath, str);
+    console.log(`${page.output} generated successfully.`);
+  });
+});
+
+// Copy the public directory to the output directory
+fse.copySync(publicDir, outputDir, { overwrite: true }, (err) => {
+  if (err) {
+    console.error('Error copying public directory:', err);
+  } else {
+    console.log('Public assets copied successfully.');
+  }
+});
