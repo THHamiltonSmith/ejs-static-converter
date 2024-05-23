@@ -1,23 +1,24 @@
-<!-- index.ejs -->
+<!-- page-3.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <!-- Global Meta tags -->
     <meta name="description" content="Converts an express EJS app into a static HTML website.">
     <meta name="keywords" content="sky enterprises, ejs-static-converter, static site generator, ejs, node, static html">
 
     <!-- Include the header HTML which contains universal tags, references, and other metadata. -->
-    <%- include("components/index-header.ejs") -%>
+    <%- include("../components/header.ejs") -%>
 </head>
 
 <body>
 
 <div class="container">
     <div class="index-main">
-        <h1>Welcome to ejs-static-converter!</h1>
-        <p>This is the demo page for ejs-static-converter. It's a tool to convert Express EJS apps into static HTML websites.</p>
-        <a href="/page-2" class="btn btn-primary">Go to Page 2</a>
-        <a href="/page-3" class="btn btn-primary">Go to Page 3</a>
+        <h1>Page 3</h1>
+        <p>This is page 3 of the ejs-static-converter demo.</p>
+        <a href="/" class="btn btn-primary">Go back to Home</a>
+        <a href="../page-2" class="btn btn-primary">Page 2</a>
     </div>
 </div>
 

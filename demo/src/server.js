@@ -10,18 +10,24 @@ app.use(express.static("public"));
 
 // Home
 app.get("/", (req, res) => {
-    res.render("index");
+    res.render("index", {
+        title: "Home",
+    });
 });
 
 // Page 2
 app.get("/page-2", (req, res) => {
-    res.render("page-2");
+    res.render("pages/page-2", {
+        title: "Page 2",
+    });
 });
 
 // Page 3
 app.get("/page-3", (req, res) => {
-    res.render("page-3");
+    res.render("pages/page-3", {
+        title: "Page 3",
+    });
 });
 
 // Initialise the server on port 3000.
-server.listen(3000);
+server.listen(2000);
